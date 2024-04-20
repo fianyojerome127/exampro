@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="./adminpage.css">
+    <link rel="stylesheet" href="./component.css">
+    <link rel="stylesheet" href="../CSS/home1.css">
+</head>
+<body>
+    <header>
+        <div class="hamburger-menu">&#9776;</div>
+        <div class="title-tag">Admin Dashboard</div>
+        <div class="user-info">
+            <div class="profile-pic">
+                <img src="../ASSESTS/ICONS/user.png" alt="Profile Picture" style="width: 100%;">
+            </div>
+        </div>
+    </header>
+
+    <div class="side-menu">
+        <div class="close-menu">&times;</div>
+        <div class="user-info-side">
+            <div class="profile-pic-side">
+                <img src="../ASSESTS/ICONS/user.png" alt="Profile Picture" style="width: 100%;">
+            </div>
+            <span class="user-name">Admin</span>
+        </div>
+        <ul>
+            <li><a href="home1.html">
+                <div class="menu-icons">
+                    <div><img src="../ASSESTS/ICONS/dashboard.png" alt=""></div>
+                    <div class="active"><p>Admin Dashboard</p></div>
+                </div>
+                </a>
+            </li>
+            <li><a href="../HTML/settings.html">
+                <div class="menu-icons">
+                    <div><img src="../ASSESTS/ICONS/user.png" alt=""></div>
+                    <div><p>Profile</p></div>
+                </div>
+                </a>
+            </li>
+            <li><a href="../HTML/signout.html">
+                <div class="menu-icons">
+                    <div><img src="../ASSESTS/ICONS/sign-out.png" alt=""></div>
+                    <div><p>Sign out</p></div>
+                </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section>
+        <div id="form-selection">
+            <p class="form-selection-heading"><b>SELECT FORM</b></p>
+            <button class="fbutton" onclick="renderForm('A')">Student Enrollment form</button>
+            <button class="fbutton" onclick="renderForm('B')">Student Removal form</button>
+            <!-- <button class="fbutton" onclick="renderForm('C')">Faculty Enrollment form</button>
+            <button class="fbutton" onclick="renderForm('D')">Faculty Removal form</button> -->
+            <button class="fbutton" onclick="renderForm('E')">Course Enrollment form</button>
+            <button class="fbutton" onclick="renderForm('F')">Course Removal form</button>
+            <button class="fbutton" style="background-color:  #fed000; color: #444;" onclick="renderForm('Exam')">Create Examination</button>
+        </div>
+        <div id="form-render" class="form-render-container">
+            <h2 class="form-render-heading">Form renders here!</h2>
+            <select id="student-id-dropdown" multiple>
+                <!-- Options will be added dynamically -->
+            </select>
+            <button id="selectAllIdsButton">Select All IDs</button>
+            <select id="semester-dropdown">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+            </select>
+            <button id="enrollButton">Enroll</button>
+        </div>
+        
+    </section>
+
+    <footer>
+        <div class="footer-links" style="margin-top: 50px;">
+            <a href="adminpage.html">Admin Dashboard</a>
+            <a href="../HTML/settings.html">Profile</a>
+            <a href="../HTML/signout.html">Sign Out</a>
+            <!-- Add additional relevant links here -->
+        </div>
+        <div class="footer-info">
+            <p>&copy; 2024 ExamPro. All rights reserved.</p>
+            <!-- Add any additional relevant information here -->
+        </div>
+    </footer>
+
+    <script src="../JAVASCRIPT/home1.js"></script>
+    <script src="adminpage.js"></script>
+    <script src="studentenrollform.js"></script>
+    <script src="studentremoveform.js"></script>
+    <script src="courseenrollmentform.js"></script>
+    <script src="courseremoveform.js"></script>
+    <script src="createexam.js"></script>
+</body>
+</html>

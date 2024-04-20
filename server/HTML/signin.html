@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamPro - Sign In</title>
+  <link rel="stylesheet" href="../CSS/signin.css">
+</head>
+<body>
+  <div class="header">
+    <img src="../ASSESTS/IMAGES/pink.jpg" alt="Vector Image">
+    <a href="index.html" style="text-decoration: none;"><h1>ExamPro</h1></a>
+  </div>
+
+  <div class="signin-form">
+    <h2>Sign In</h2>
+    <form id="signin-form" onsubmit="validateSignInForm(event)">
+      <input type="text" id="signin-username" placeholder="Username" required>
+      <input type="password" id="signin-password" placeholder="Password" required>
+      <button type="submit">Enter</button>
+    </form>
+  </div>
+  <div class="back-arrow">
+    <div class="cont">
+        <a href="javascript:history.go(-1)" style="margin-bottom: 10px; margin-left: 100px;"><img src="../ASSESTS/IMAGES/arrow-left.png" 
+          style="width: 30px;" alt="Back"></a>
+
+    <p style="margin-top: 10px;">Don't have an account? <a href="../signup.html">Sign Up</a></p>
+  </div>
+  </div>
+  
+
+  <script type="text/javascript" src="../JAVASCRIPT/signin.js"></script>
+</body>
+</html>

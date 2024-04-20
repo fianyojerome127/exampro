@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-name {
+    font-weight: 500;
+    margin-right: 15px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    
+}
+
+.hamburger-menu {
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.title-tag{
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color:#1e66b3;
+    padding-top: 60px;
+    transition: left 0.3s ease;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu ul li {
+    
+    padding: 15px 20px;
+    color: #fff;
+    cursor: pointer;
+}
+.side-menu ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+/* Existing CSS code remains unchanged */
+
+.side-menu .close-menu {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.side-menu .user-info-side {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.side-menu .profile-pic-side {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.menu-icons{
+    width: 55%;
+    display: flex; 
+    justify-content:flex-start; 
+    align-items: center;
+    margin-bottom: -30px;
+}
+.menu-icons p{
+    margin-left: 20px;
+}
+.menu-icons img{
+    width: 25px;
+}
+.menu-icons .active p{
+    color: #fa5ff2;
+}
+
+
+
+.main-content {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.section-heading {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+    color:#222;
+}
+
+.completed-exams, .upcoming-exams {
+    margin-bottom: 40px;
+}
+
+
+
+.exam-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exam-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.6);
+}
+
+.exam-item h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.exam-item p {
+    margin: 10px 0;
+    color: #555;
+}
+
+
+
+footer {
+    background-color: #e4f1ff;
+    color: #222;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    display: flex;
+}
+
+.footer-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #1e66b3;
+}
+
+.footer-info {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}

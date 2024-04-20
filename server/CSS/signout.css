@@ -1,0 +1,40 @@
+/* Sign Out Section Styles */
+.main-content {
+    text-align: center;
+    height: 100%;
+    padding: 20px;
+    margin-top: 15%;
+    margin-bottom: 10%;
+}
+
+.signout-btn {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Tablet View */
+@media (max-width: 768px) {
+    .main-content {
+        text-align: center;
+        height: 100%;
+        padding: 20px;
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+}
+
+ /* Mobile View */
+ @media (max-width: 576px) {
+    .main-content {
+        text-align: center;
+        height: 100%;
+        padding: 20px;
+        margin-top: 30%;
+        margin-bottom: 30%;
+    }
+  }
+  

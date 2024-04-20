@@ -1,0 +1,17 @@
+/* Exam Section Styles */
+.exam-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exam-item {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.exam-item h2 {
+    margin-bottom: 5px;
+    color: #333;
+}
