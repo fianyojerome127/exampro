@@ -35,7 +35,7 @@ function signUpUser(userData) {
   .then(response => {
     if (response.ok) {
       // Redirect to home1.html on successful signup
-      window.location.href = './Components/student.html';
+      window.location.href = './server/Components/student.html';
     } else {
       throw new Error('Failed to signup');
     }
