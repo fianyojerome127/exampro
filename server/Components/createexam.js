@@ -8,6 +8,7 @@ function loadExaminationDetails() {
 
 // Function to save examination details to localStorage
 function saveExaminationDetails(details) {
+    console.log('Saving examination details:', details); // Add this line for debugging
     localStorage.setItem('examinationDetails', JSON.stringify(details));
 }
 
