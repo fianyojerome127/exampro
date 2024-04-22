@@ -51,10 +51,6 @@ const Admin = mongoose.model('Admin', adminSchema);
 const studentSchema = new mongoose.Schema( {
   S_ID: String,
   Semester: String,
-  //Fname: String,
-  //Lname: String,
-  //Email: String,
-  //Password: String,
   Dept: { type: String, default: 'IT Department' },
   rollNumber: { type: String, default: 'Row no 3' }, 
   branch: { type: String, default: 'LBC 101' }, // Define enum for branch
@@ -85,8 +81,6 @@ const examinationSchema = new mongoose.Schema({
   time: String,
   duration: String,
   roomNumber: { type: String }, // Remove required flag for automatic generation
-  examId: { type: String, required: true, unique: true }, // Keep required flag for uniqueness
-
 });
 
 // Pre-save middleware to generate room number and exam ID

@@ -106,5 +106,6 @@ async function enrollExamination(courseId, date, time, duration) {
 }
 
 
+
 // Initial rendering of examination details
 renderExaminationForm(loadExaminationDetails());
