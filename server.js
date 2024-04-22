@@ -14,30 +14,24 @@ const PORT = process.env.PORT || 3000;
 
 
 
-// Connect to MongoDB for user information
-mongoose.connect(`${process.env.MONGODB_URI}/userinfo`, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('User MongoDB connected'))
-  .catch(err => console.error('User MongoDB connection error:', err));
+// Connect to MongoDB using the provided MongoDB URI
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-// Connect to MongoDB for user information
-  mongoose.connect(`${process.env.MONGODB_URI}/adminn`, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('User MongoDB connected'))
-    .catch(err => console.error('User MongoDB connection error:', err));
+// Define separate schemas and models for different MongoDB collections if needed
+// Example:
+// const UserInfoSchema = new mongoose.Schema({ ... });
+// const UserInfoModel = mongoose.model('UserInfo', UserInfoSchema);
 
-// Connect to MongoDB for student enrollment
-mongoose.connect(`${process.env.MONGODB_URI}/studentenroll`, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Student Enrollment MongoDB connected'))
-.catch(err => console.error('Student Enrollment MongoDB connection error:', err));
+// Now you can use UserInfoModel or any other models as needed throughout your application
 
-// Connect to MongoDB for course enrollment
-mongoose.connect(`${process.env.MONGODB_URI}/courseenroll`, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Course Enrollment MongoDB connected'))
-.catch(err => console.error('Course Enrollment MongoDB connection error:', err));
-
-// Connect to MongoDB for Create Xamination DataBase
-mongoose.connect(`${process.env.MONGODB_URI}/examsDB`, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Examination DataBase MongoDB connected'))
-.catch(err => console.error('Examination DataBase MongoDB connection error:', err));
+// Optionally, you can define separate connections for different purposes if necessary
+// Example:
+// const adminConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/adminn`, { useNewUrlParser: true, useUnifiedTopology: true });
+// const studentEnrollConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/studentenroll`, { useNewUrlParser: true, useUnifiedTopology: true });
+// const courseEnrollConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/courseenroll`, { useNewUrlParser: true, useUnifiedTopology: true });
+// const examsDBConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/examsDB`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // Access JWT secret key
