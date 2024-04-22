@@ -19,20 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Define separate schemas and models for different MongoDB collections if needed
-// Example:
-// const UserInfoSchema = new mongoose.Schema({ ... });
-// const UserInfoModel = mongoose.model('UserInfo', UserInfoSchema);
-
-// Now you can use UserInfoModel or any other models as needed throughout your application
-
-// Optionally, you can define separate connections for different purposes if necessary
-// Example:
-// const adminConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/adminn`, { useNewUrlParser: true, useUnifiedTopology: true });
-// const studentEnrollConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/studentenroll`, { useNewUrlParser: true, useUnifiedTopology: true });
-// const courseEnrollConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/courseenroll`, { useNewUrlParser: true, useUnifiedTopology: true });
-// const examsDBConnection = mongoose.createConnection(`${process.env.MONGODB_URI}/examsDB`, { useNewUrlParser: true, useUnifiedTopology: true });
-
 
 // Access JWT secret key
 const secretKey = process.env.JWT_SECRET;
@@ -398,7 +384,10 @@ app.get('/api/redirect', (req, res) => {
 
 
 
-
+// Define a route handler for the root path
+app.get('/', (req, res) => {
+  res.send('Welcome to ExamPro!');
+});
 
 
 
