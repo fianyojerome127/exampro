@@ -29,7 +29,7 @@ function renderCourseEnrollmentForm() {
         const credits = document.getElementById('credits').value;
 
         // Call the function to handle the enrollment of the course
-        enrollCourse(courseId, courseName, credits);
+        await enrollCourse(courseId, courseName, credits);
     });
 }
 

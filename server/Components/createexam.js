@@ -55,7 +55,7 @@ function renderExaminationDetails(details) {
         const duration = document.getElementById('duration').value;
 
         // Call the function to handle the enrollment of the examination
-        enrollExamination(courseId, date, time, duration);
+        await enrollExamination(courseId, date, time, duration);
     });
 }
 
@@ -87,7 +87,6 @@ async function enrollExamination(courseId, date, time, duration) {
         // Handle network errors or other issues
     }
 }
-
 
 // Initial rendering of examination details
 renderExaminationDetails(loadExaminationDetails());

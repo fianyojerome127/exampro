@@ -23,19 +23,6 @@ function renderStudentEnrollmentForm() {
     const semesterInput = createInputField('text', 'Semester', 'Semester');
     form.appendChild(semesterInput);
 
-   // const firstNameInput = createInputField('text', 'First Name', 'Fname');
-    //form.appendChild(firstNameInput);
-
-   // const lastNameInput = createInputField('text', 'Last Name', 'Lname');
-   // form.appendChild(lastNameInput);
-
-    //const emailInput = createInputField('email', 'Email', 'Email');
-    //form.appendChild(emailInput);
-
-    //const passwordInput = createInputField('password', 'Password', 'Password');
-    //form.appendChild(passwordInput);
-
-
 
     // Create and append a submit button
     const submitButton = document.createElement('input');
@@ -67,10 +54,6 @@ function enroll(event, form) {
     const formData = new FormData(form);
     const S_ID = formData.get('S_ID');
     const Semester = formData.get('Semester');
-    //const Fname = formData.get('Fname');
-    //const Lname = formData.get('Lname');
-    //const Email = formData.get('Email');
-    //const Password = formData.get('Password');
 
     // Perform any necessary actions, such as sending the data to the backend API
     // You can use fetch or other AJAX methods to send the form data to your backend server
