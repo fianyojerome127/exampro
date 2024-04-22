@@ -55,9 +55,9 @@ const studentSchema = new mongoose.Schema( {
   //Lname: String,
   //Email: String,
   //Password: String,
-  Dept: String,
+  Dept: { type: String, default: 'IT Department' },
   rollNumber: { type: String, default: 'Row no 3' }, 
-  branch: { type: String, default: 'Center A' }, // Define enum for branch
+  branch: { type: String, default: 'LBC 101' }, // Define enum for branch
   year: { type: String, default: getCurrentAcademicYear } // Set default value for year
     // Add more fields as needed
 });
@@ -263,6 +263,19 @@ app.post('/api/examinations/enroll', async (req, res) => {
 });
 
 
+app.get('/api/studentName', async (req, res) => {
+  try {
+      // Fetch student information from the database
+      const studentName = await User.findOne();
+
+      // Send the student information to the client
+      res.status(200).json({ studentName });
+  } catch (error) {
+      console.error('Error fetching student name:', error);
+      res.status(500).json({ error: 'Failed to fetch student name' });
+  }
+});
+
 app.get('/api/studentInfo', async (req, res) => {
   try {
       // Fetch student information from the database
@@ -276,36 +289,6 @@ app.get('/api/studentInfo', async (req, res) => {
   }
 });
 
-
-// Define a route to fetch student data
-app.get('/api/studentData', async (req, res) => {
-  try {
-      // Fetch student data from the database or any other source
-      const studentInfo = await Student.findOne(); // Example: Retrieving student info from MongoDB
-      const upcomingExams = await Examination.find(); // Example: Retrieving upcoming exams from MongoDB
-
-      // Send the student data back to the client
-      res.status(200).json({ studentInfo, upcomingExams });
-  } catch (error) {
-      console.error('Error fetching student data:', error);
-      res.status(500).json({ error: 'Failed to fetch student data' });
-  }
-});
-
-
-// Route to fetch student information
-app.get('/api/studentInfo', async (req, res) => {
-  try {
-      // Fetch student information from the database
-      const studentInfo = await Student.findOne();
-
-      // Send the student information to the client
-      res.status(200).json({ studentInfo });
-  } catch (error) {
-      console.error('Error fetching student information:', error);
-      res.status(500).json({ error: 'Failed to fetch student information' });
-  }
-});
 
 
 // Route to fetch upcoming exams data
@@ -323,7 +306,21 @@ app.get('/api/upcomingExams', async (req, res) => {
 });
 
 
+// Define a route to fetch student data
+app.get('/api/studentData', async (req, res) => {
+  try {
+      // Fetch student data from the database or any other source
+      const studentName = await User.findOne(); // Retrieving student Name from MongoDB
+      const studentInfo = await Student.findOne(); // Example: Retrieving student info from MongoDB
+      const upcomingExams = await Examination.find(); // Example: Retrieving upcoming exams from MongoDB
 
+      // Send the student data back to the client
+      res.status(200).json({ studentName, studentInfo, upcomingExams });
+  } catch (error) {
+      console.error('Error fetching student data:', error);
+      res.status(500).json({ error: 'Failed to fetch student data' });
+  }
+});
 
 
 

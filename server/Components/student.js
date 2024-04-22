@@ -12,10 +12,12 @@ function fetchStudentData() {
         })
         .then(data => {
             // Extract student info and upcoming exams from the response data
+            const studentName = data.studentName;
             const studentInfo = data.studentInfo;
             const upcomingExams = data.upcomingExams;
 
             // Call functions to render student info and upcoming exams
+            renderStudentName(studentName);
             renderStudentInfo(studentInfo);
             renderUpcomingExams(upcomingExams);
         })
@@ -23,6 +25,54 @@ function fetchStudentData() {
             console.error('Error fetching student data:', error);
         });
 }
+
+
+
+// Function to render student Name
+function renderStudentName(studentName) {
+    // Get the HTML element where you want to render the student Name
+    const studentInfoContainer = document.getElementById('student-name');
+
+    // Create HTML elements to display the student Name
+    const studentInfoHTML = `
+        <h2>Student Information</h2>
+        <p><strong>Name:</strong> ${studentName.name}</p>
+        <p><strong>Name:</strong> ${studentName.studentId}</p>
+    `;
+
+    // Update the HTML of the container element with the student info
+    studentInfoContainer.innerHTML = studentInfoHTML;
+}
+
+// Function to fetch student data from the server
+function fetchStudentName() {
+    // Make a GET request to fetch student data from the server
+    fetch('https://exampro-d36e23768ba5.herokuapp.com/api/studentName')
+        .then(response => {
+            // Check if the response is successful (status code 200)
+            if (!response.ok) {
+                throw new Error('Failed to fetch student Name and student Id');
+            }
+            // Parse the JSON response
+            return response.json();
+        })
+        .then(data => {
+            // Extract student info from the response
+            const studentName = data.studentName;
+
+            // Call the function to render student info
+            renderStudentName(studentName);
+        })
+        .catch(error => {
+            console.error('Error fetching student data and Id:', error);
+        });
+}
+
+// Call the function to fetch and render student data when the page loads
+window.onload = fetchStudentName;
+
+
+
 
 
 
@@ -34,13 +84,12 @@ function renderStudentInfo(studentInfo) {
 
     // Create HTML elements to display the student info
     const studentInfoHTML = `
-        <h2>Student Information</h2>
-        <p><strong>Name:</strong> ${studentInfo.Fname}</p>
         <p><strong>Roll Number:</strong> ${studentInfo.rollNumber}</p>
-        <p><strong>Branch:</strong> ${studentInfo.branch}</p>
+        <p><strong>Location:</strong> ${studentInfo.branch}</p>
         <p><strong>Year:</strong> ${studentInfo.year}</p>
+        <p><strong>Name:</strong> ${studentInfo.Dept}</p>
         <!-- Add more fields as needed -->
-    `;
+    `.join('');
 
     // Update the HTML of the container element with the student info
     studentInfoContainer.innerHTML = studentInfoHTML;
@@ -82,16 +131,14 @@ function renderUpcomingExams(upcomingExams) {
     const upcomingExamsContainer = document.getElementById('upcoming-exams');
 
     // Create HTML elements to display the upcoming exams
-    const examsHTML = upcomingExams.map(Examination => `
+    const examsHTML =  `
         <div class="Examination">
-            <h3>Exam ID: ${Examination.examId}</h3>
-            <p><strong>Course ID:</strong> ${Examination.courseId}</p>
-            <p><strong>Date:</strong> ${Examination.date}</p>
-            <p><strong>Time:</strong> ${Examination.time}</p>
-            <p><strong>Room Number:</strong> ${Examination.roomNumber}</p>
+            <p><strong>Course ID:</strong> ${upcomingExams.courseId}</p>
+            <p><strong>Date:</strong> ${upcomingExams.date}</p>
+            <p><strong>Time:</strong> ${upcomingExams.time}</p>
             <!-- Add more fields as needed -->
         </div>
-    `).join('');
+    `.join('');
 
     // Update the HTML of the container element with the upcoming exams
     upcomingExamsContainer.innerHTML = examsHTML;
@@ -100,7 +147,7 @@ function renderUpcomingExams(upcomingExams) {
 // Function to fetch upcoming exams data from the server
 function fetchUpcomingExamsData() {
     // Make a GET request to fetch upcoming exams data from the server
-    fetch('http://localhost:3000/api/upcomingExams')
+    fetch('https://exampro-d36e23768ba5.herokuapp.com/api/upcomingExams')
         .then(response => {
             // Check if the response is successful (status code 200)
             if (!response.ok) {
@@ -127,8 +174,12 @@ window.onload = fetchUpcomingExamsData;
 
 // Function to initialize the page
 function initializePage() {
+    //Fetch student Name fom server
+    fetchStudentName();
     // Fetch student data from the server
     fetchStudentData();
+    // Fetch student upcoming exam details from the server
+    fetchUpcomingExamsData();
 }
 
 // Call the initialize function when the page loads
