@@ -9,7 +9,7 @@ function saveExaminationDetails(details) {
 }
 
 // Function to render examination details
-function renderExaminationDetails(details) {
+function renderExaminationForm(details) {
     const formContainer = document.getElementById('form-render');
     formContainer.innerHTML = ''; // Clear any existing content
 
@@ -89,4 +89,4 @@ async function enrollExamination(courseId, date, time, duration) {
 }
 
 // Initial rendering of examination details
-renderExaminationDetails(loadExaminationDetails());
+renderExaminationForm(loadExaminationDetails());
