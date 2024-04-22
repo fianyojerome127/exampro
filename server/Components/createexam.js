@@ -36,13 +36,17 @@ function renderExaminationForm(details) {
     // Append the form HTML to the form container
     formContainer.innerHTML = formHTML;
 
-    // Populate existing examination details
-    const detailsList = document.getElementById('detailsList');
-    details.forEach(detail => {
-        const li = document.createElement('li');
-        li.textContent = `Course ID: ${detail.courseId}, Date: ${detail.date}, Time: ${detail.time}, Duration: ${detail.duration}`;
-        detailsList.appendChild(li);
-    });
+    if (details) {
+        const detailsList = document.getElementById('detailsList');
+        details.forEach(detail => {
+            const li = document.createElement('li');
+            li.textContent = `Course ID: ${detail.courseId}, Date: ${detail.date}, Time: ${detail.time}, Duration: ${detail.duration}`;
+            detailsList.appendChild(li);
+        });
+    } else {
+        // Handle case where details are not available
+        console.log('No examination details available');
+    }
 
     // Attach event listener to the form for submission
     document.getElementById('examinationForm').addEventListener('submit', async (event) => {
