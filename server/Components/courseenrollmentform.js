@@ -48,15 +48,18 @@ async function enrollCourse(courseId, courseName, credits) {
         });
         if (response.ok) {
             // Handle successful enrollment
+            alert('Course enrolled successfully');
             console.log('Course enrolled successfully');
             // You can display a success message to the user if needed
         } else {
             // Handle error response from the server
+            alert('Error enrolling course');
             console.error('Error enrolling course');
             // You can display an error message to the user if needed
         }
     } catch (error) {
         // Handle network errors or other issues
+        alert('Error enrolling course:', error);
         console.error('Error enrolling course:', error);
         // You can display an error message to the user if needed
     }

@@ -41,13 +41,16 @@ async function removeStudent(studentId) {
 
         if (response.ok) {
             // Handle successful removal
+            alert('Student removed successfully');
             console.log('Student removed successfully');
         } else {
             // Handle error response from server
+            alert('Error removing student:', response.statusText);
             console.error('Error removing student:', response.statusText);
         }
     } catch (error) {
         // Handle network errors or other issues
+        alert('Error removing student:', error.message);
         console.error('Error removing student:', error.message);
     }
 }

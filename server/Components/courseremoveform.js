@@ -39,7 +39,9 @@ async function removeCourse(courseId) {
         const data = await response.json();
         console.log(data); // Log response data
         // Handle success message or redirect if needed
+        alert('course removed successfully');
     } catch (error) {
+        alert('Error removing course:', error);
         console.error('Error removing course:', error);
         // Handle error message display to the user
     }

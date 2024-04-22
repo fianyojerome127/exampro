@@ -1,7 +1,18 @@
-function renderExaminationForm() {
+// Function to load examination details from localStorage
+function loadExaminationDetails() {
+    return JSON.parse(localStorage.getItem('examinationDetails')) || [];
+}
+
+// Function to save examination details to localStorage
+function saveExaminationDetails(details) {
+    localStorage.setItem('examinationDetails', JSON.stringify(details));
+}
+
+// Function to render examination details
+function renderExaminationDetails(details) {
     const formContainer = document.getElementById('form-render');
     formContainer.innerHTML = ''; // Clear any existing content
-    
+
     // Create the form HTML
     const formHTML = `
         <h2>Examination Details</h2>
@@ -16,10 +27,22 @@ function renderExaminationForm() {
             <input type="text" id="duration" name="duration" required>
             <button type="submit">Enroll</button>
         </form>
+        <div id="examinationDetails">
+            <h2>Current Examination Details</h2>
+            <ul id="detailsList"></ul>
+        </div>
     `;
-    
+
     // Append the form HTML to the form container
     formContainer.innerHTML = formHTML;
+
+    // Populate existing examination details
+    const detailsList = document.getElementById('detailsList');
+    details.forEach(detail => {
+        const li = document.createElement('li');
+        li.textContent = `Course ID: ${detail.courseId}, Date: ${detail.date}, Time: ${detail.time}, Duration: ${detail.duration}`;
+        detailsList.appendChild(li);
+    });
 
     // Attach event listener to the form for submission
     document.getElementById('examinationForm').addEventListener('submit', async (event) => {
@@ -36,6 +59,7 @@ function renderExaminationForm() {
     });
 }
 
+// Function to handle enrollment of examination
 async function enrollExamination(courseId, date, time, duration) {
     try {
         const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/examinations/enroll', {
@@ -47,15 +71,23 @@ async function enrollExamination(courseId, date, time, duration) {
         });
         if (response.ok) {
             // Examination enrolled successfully
+            alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
-            // Handle success message or redirect if needed
+
+            // Redirect to createexam.html
+            window.location.href = 'createexam.html';
         } else {
+            alert('Failed to enroll examination:', response.statusText);
             console.error('Failed to enroll examination:', response.statusText);
             // Handle error response
         }
     } catch (error) {
+        alert('Error enrolling examination:', error.message);
         console.error('Error enrolling examination:', error.message);
         // Handle network errors or other issues
     }
 }
 
+
+// Initial rendering of examination details
+renderExaminationDetails(loadExaminationDetails());
