@@ -7,6 +7,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const path = require('path'); // Import the path module
+const { v4: uuidv4 } = require('uuid');
+
 
 
 const app = express();
@@ -80,23 +82,15 @@ const examinationSchema = new mongoose.Schema({
   date: String,
   time: String,
   duration: String,
-  roomNumber: { type: String }, // Remove required flag for automatic generation
+  examId: { type: String, required: true, unique: true }, // Keep required flag for uniqueness
+  //roomNumber: { type: String }, // Remove required flag for automatic generation
 });
 
 // Pre-save middleware to generate room number and exam ID
-examinationSchema.pre('save', async function (next) {
-  try {
-      // Generate room number (example: RN001)
-      this.roomNumber = 'RN' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-
-      // Generate unique exam ID (example: EXAM001)
-      this.examId = 'EXAM' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-
-      // Proceed to save
-      next();
-  } catch (error) {
-      next(error);
-  }
+examinationSchema.pre('save', function(next) {
+  // Generate UUID as examId
+  this.examId = uuidv4();
+  next();
 });
 
 const Examination = mongoose.model('Examination', examinationSchema);
