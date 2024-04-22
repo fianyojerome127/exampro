@@ -113,7 +113,9 @@ const Examination = mongoose.model('Examination', examinationSchema);
 app.use(bodyParser.json());
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'EXAM PRO')));
+app.use(express.static(path.join(__dirname, 'server')));
+
+//app.use('/styles', express.static(path.join(__dirname, 'server'))); // Serve CSS files from the 'server' directory under the '/styles' route
 
 // Enable CORS for all routes
 app.use(cors());
@@ -381,6 +383,7 @@ app.get('/api/redirect', (req, res) => {
   // Redirect to student.html
   res.redirect('/student.html');
 });
+
 
 
 
