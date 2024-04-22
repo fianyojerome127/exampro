@@ -20,7 +20,7 @@ function validateSignInForm(event) {
 
 function signInUser(userData) {
   // Make AJAX request to signin endpoint
-  fetch('http://localhost:3000/api/signin', {
+  fetch('https://exampro-d36e23768ba5.herokuapp.com/api/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

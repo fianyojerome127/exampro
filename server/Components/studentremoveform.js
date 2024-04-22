@@ -31,7 +31,7 @@ function renderStudentRemovalForm() {
 async function removeStudent(studentId) {
     try {
         // Fetch request to remove the student using the studentId
-        const response = await fetch('http://localhost:3000/api/removeStudent', {
+        const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/removeStudent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

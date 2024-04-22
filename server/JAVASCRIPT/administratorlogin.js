@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   try {
-      const response = await fetch('http://localhost:3000/api/admin/login', {
+      const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/admin/login', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'

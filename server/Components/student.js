@@ -1,7 +1,7 @@
 // Fetch student information and upcoming exams
 function fetchStudentData() {
     // Make a GET request to fetch student data from the server
-    fetch('http://localhost:3000/api/studentData')
+    fetch('https://exampro-d36e23768ba5.herokuapp.com/api/studentData')
         .then(response => {
             // Check if the response is successful (status code 200)
             if (!response.ok) {
@@ -49,7 +49,7 @@ function renderStudentInfo(studentInfo) {
 // Function to fetch student data from the server
 function fetchStudentData() {
     // Make a GET request to fetch student data from the server
-    fetch('http://localhost:3000/api/studentInfo')
+    fetch('https://exampro-d36e23768ba5.herokuapp.com/api/studentInfo')
         .then(response => {
             // Check if the response is successful (status code 200)
             if (!response.ok) {

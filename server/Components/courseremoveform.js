@@ -29,7 +29,7 @@ function renderCourseRemovalForm() {
 
 async function removeCourse(courseId) {
     try {
-        const response = await fetch('http://localhost:3000/api/courses/removecourse', {
+        const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/courses/removecourse', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -75,7 +75,7 @@ function enroll(event, form) {
     // Perform any necessary actions, such as sending the data to the backend API
     // You can use fetch or other AJAX methods to send the form data to your backend server
     // For example:
-    fetch('http://localhost:3000/api/enroll', {
+    fetch('https://exampro-d36e23768ba5.herokuapp.com/api/enroll', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

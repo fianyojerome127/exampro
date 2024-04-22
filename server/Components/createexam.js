@@ -38,7 +38,7 @@ function renderExaminationForm() {
 
 async function enrollExamination(courseId, date, time, duration) {
     try {
-        const response = await fetch('http://localhost:3000/api/examinations/enroll', {
+        const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/examinations/enroll', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

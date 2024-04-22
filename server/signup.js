@@ -25,7 +25,7 @@ function validateSignUpForm(event) {
 
 function signUpUser(userData) {
   // Submit the form data
-  fetch('http://localhost:3000/api/signup', {
+  fetch('https://exampro-d36e23768ba5.herokuapp.com/api/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
