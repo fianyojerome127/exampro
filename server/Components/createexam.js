@@ -40,8 +40,9 @@ function renderExaminationForm(details) {
     // Append the form HTML to the form container
     formContainer.innerHTML = formHTML;
 
-    if (details) {
-        const detailsList = document.getElementById('detailsList');
+    const detailsList = document.getElementById('detailsList');
+    
+    if (details && details.length > 0) {
         details.forEach(detail => {
             const li = document.createElement('li');
             li.textContent = `Course ID: ${detail.courseId}, Date: ${detail.date}, Time: ${detail.time}, Duration: ${detail.duration}`;
@@ -49,7 +50,9 @@ function renderExaminationForm(details) {
         });
     } else {
         // Handle case where details are not available
-        console.log('No examination details available');
+        const li = document.createElement('li');
+        li.textContent = 'No examination details available';
+        detailsList.appendChild(li);
     }
 
     // Attach event listener to the form for submission
