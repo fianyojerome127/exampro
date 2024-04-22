@@ -135,23 +135,57 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-
-app.post('/api/signin', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    // Find the user with the provided username (student ID)
     const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(401).json({ message: 'Authentication failed' });
+
+    // If user is found
+    if (user) {
+      // Check if the user's student ID is enrolled
+      const isEnrolled = await Student.findOne({ S_ID: user.studentId });
+
+      // If user is enrolled and password matches, redirect to /api/redirect
+      if (isEnrolled && await bcrypt.compare(password, user.password)) {
+        res.json({ redirect: '/api/redirect' });
+      } else {
+        res.status(401).json({ message: 'Authentication failed' });
+      }
+    } else {
+      res.status(401).json({ message: 'Authentication failed' });
     }
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(401).json({ message: 'Authentication failed' });
-    }
-    const token = jwt.sign({ username: user.username, userId: user._id }, secretKey, { expiresIn: '1h' });
-    res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Route for user signup
+app.post('/api/signup', async (req, res) => {
+  try {
+    const { email, password, name, username, studentId } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+      
+    // Create a new user document
+    const user = new User({ email, password: hashedPassword, name, username, studentId });
+
+    // Save the user to the database
+    await user.save();
+
+    // Redirect to student.html upon successful signup
+    res.json({ redirect: '/api/redirect' });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// New route for redirection after successful login or signup
+app.get('/api/redirect', (req, res) => {
+  // Redirect to student.html
+  res.redirect('/server/Components/student.html');
 });
 
 
@@ -263,6 +297,28 @@ app.post('/api/examinations/enroll', async (req, res) => {
 });
 
 
+// Routes
+// Endpoint to check enrollment status
+app.get('/api/checkEnrollment/:studentId', async (req, res) => {
+  try {
+    const studentId = req.params.studentId;
+
+    // Query your database to check if the student ID exists in the enrollment records
+    const isEnrolled = await Student.findOne({ S_ID: studentId });
+
+    // Send response based on enrollment status
+    if (isEnrolled) {
+      res.json({ isEnrolled: true });
+    } else {
+      res.json({ isEnrolled: false });
+    }
+  } catch (error) {
+    console.error('Error checking enrollment status:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Existing routes
 app.get('/api/studentName', async (req, res) => {
   try {
       // Fetch student information from the database
@@ -288,8 +344,6 @@ app.get('/api/studentInfo', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch student information' });
   }
 });
-
-
 
 // Route to fetch upcoming exams data
 app.get('/api/upcomingExams', async (req, res) => {
@@ -323,63 +377,6 @@ app.get('/api/studentData', async (req, res) => {
 });
 
 
-
-
-
-// Route for user signup
-app.post('/api/signup', async (req, res) => {
-  try {
-      const { email, password, name, username, studentId } = req.body;
-      const hashedPassword = await bcrypt.hash(password, 10);
-      
-      // Create a new user document
-      const user = new User({ email, password: hashedPassword, name, username, studentId });
-
-      // Save the user to the database
-      await user.save();
-
-      // Redirect to student.html upon successful signup
-      res.json({ redirect: '/api/redirect' });
-  } catch (error) {
-      console.error('Error during signup:', error);
-      res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// New route for redirection after successful login or signup
-app.get('/api/redirect', (req, res) => {
-  // Redirect to student.html
-  res.redirect('/student.html');
-});
-
-
-
-
-// Existing route for user login
-app.post('/api/login', async (req, res) => {
-  try {
-      const { username, password } = req.body;
-
-      // Find the user with the provided username (student ID)
-      const user = await User.findOne({ username });
-
-      // If user is found and password matches, redirect to /api/redirect
-      if (user && await bcrypt.compare(password, user.password)) {
-          res.json({ redirect: '/api/redirect' });
-      } else {
-          res.status(401).json({ message: 'Authentication failed' });
-      }
-  } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// New route for redirection after successful login
-app.get('/api/redirect', (req, res) => {
-  // Redirect to student.html
-  res.redirect('/student.html');
-});
 
 
 

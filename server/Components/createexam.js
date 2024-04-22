@@ -86,7 +86,7 @@ async function enrollExamination(courseId, date, time, duration) {
             console.log('Examination enrolled successfully');
 
             // Redirect to createexam.html
-            window.location.href = '../HTML/home1.html';
+            window.location.href = './createexam.html';
         } else {
             alert('Failed to enroll examination:', response.statusText);
             console.error('Failed to enroll examination:', response.statusText);
