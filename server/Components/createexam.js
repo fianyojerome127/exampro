@@ -70,6 +70,7 @@ function renderExaminationForm(details) {
     });
 }
 
+
 // Function to handle enrollment of examination
 async function enrollExamination(courseId, date, time, duration) {
     try {
@@ -85,19 +86,25 @@ async function enrollExamination(courseId, date, time, duration) {
             alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
 
-            // Redirect to createexam.html
-            window.location.href = './createexam.html';
+            // Update examination details and render again
+            const newDetail = { courseId, date, time, duration };
+            const details = loadExaminationDetails() || [];
+            details.push(newDetail);
+            saveExaminationDetails(details);
+            renderExaminationForm(details);
         } else {
-            alert('Failed to enroll examination:', response.statusText);
-            console.error('Failed to enroll examination:', response.statusText);
-            // Handle error response
+            // Failed to enroll examination
+            const responseData = await response.json();
+            alert('Failed to enroll examination: ' + responseData.error);
+            console.error('Failed to enroll examination:', responseData.error);
         }
     } catch (error) {
+        // Error enrolling examination
         alert('Error enrolling examination:', error.message);
         console.error('Error enrolling examination:', error.message);
-        // Handle network errors or other issues
     }
 }
+
 
 // Initial rendering of examination details
 renderExaminationForm(loadExaminationDetails());
