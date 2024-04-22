@@ -384,13 +384,6 @@ app.get('/api/redirect', (req, res) => {
 
 
 
-// Define a route handler for the root path
-//app.get('/', (req, res) => {
-  res.send('Welcome to ExamPro!');
-//});
-
-
-
 
 // Start server
 app.listen(PORT, () => {
