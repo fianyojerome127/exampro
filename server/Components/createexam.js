@@ -1,7 +1,9 @@
 // Function to load examination details from localStorage
 function loadExaminationDetails() {
-    return JSON.parse(localStorage.getItem('examinationDetails')) || [];
+    const details = JSON.parse(localStorage.getItem('examinationDetails'));
+    return details || null; // Return null if no details are available
 }
+
 
 // Function to save examination details to localStorage
 function saveExaminationDetails(details) {
