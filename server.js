@@ -253,6 +253,10 @@ app.post('/api/courses/enroll', async (req, res) => {
     // Extract course data from request body
     const { courseId, courseName, credits } = req.body;
 
+    // Log the received course data
+    console.log('Received course data:', { courseId, courseName, credits });
+
+
     // Create new course document
     const course = new Course({ courseId, courseName, credits });
 
@@ -262,6 +266,8 @@ app.post('/api/courses/enroll', async (req, res) => {
     // Send success response
     res.status(201).json({ message: 'Course enrolled successfully' });
   } catch (error) {
+    // Log and send error response
+    console.error('Error enrolling course:', error);
     // Send error response
     res.status(500).json({ error: error.message });
   }
