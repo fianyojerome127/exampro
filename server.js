@@ -125,7 +125,7 @@ app.post('/api/signin', async (req, res) => {
     // Find the user with the provided username (student ID)
     const user = await User.findOne({ username });
 
-    // If user is found
+    // If user is foundf
     if (user) {
       // Check if the user's student ID is enrolled
       const isEnrolled = await Student.findOne({ S_ID: user.studentId });
