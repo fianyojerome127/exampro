@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 
 // Load examination details from localStorage
 function loadExaminationDetails() {
