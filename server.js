@@ -269,12 +269,10 @@ app.post('/api/courses/removecourse', async (req, res) => {
 // API endpoint for enrolling an examination
 app.post('/api/examinations/enroll', async (req, res) => {
   try {
-      const { courseId, date, time, duration } = req.body;
-      // Create a new examination document in the database
-      const examination = new Examination({ courseId, date, time, duration });
+      const { courseId, date, time, duration, examId } = req.body; // Include examId from the request body
 
-      // Generate unique exam ID using uuid
-      examination.examId = uuidv4();
+      // Create a new examination document in the database
+      const examination = new Examination({ courseId, date, time, duration, examId });
 
       await examination.save();
       res.status(200).json({ message: 'Examination enrolled successfully' });
