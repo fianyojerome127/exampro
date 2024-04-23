@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 // Function to load examination details from the server
 async function loadExaminationDetailsFromServer() {
     try {
