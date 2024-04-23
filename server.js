@@ -284,6 +284,22 @@ app.post('/api/examinations/enroll', async (req, res) => {
 });
 
 
+// API endpoint for retrieving examination details
+app.get('/api/examinations', async (req, res) => {
+  try {
+      // Fetch examination details from the database
+      const examinations = await Examination.find(); // Assuming Examination is your Mongoose model
+      res.json({ examinations });
+  } catch (error) {
+      console.error('Error retrieving examination details:', error);
+      res.status(500).json({ error: 'Failed to retrieve examination details from the server' });
+  }
+});
+
+
+
+
+
 // Routes
 // Endpoint to check enrollment status
 app.get('/api/checkEnrollment/:studentId', async (req, res) => {
