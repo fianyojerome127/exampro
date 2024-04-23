@@ -78,7 +78,7 @@ async function enrollExamination(courseId, date, time, duration) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ examId: generateExamId(), courseId, date, time, duration }) // Add examId
+            body: JSON.stringify({ examId, courseId, date, time, duration }) // Add examId
         });
 
         if (response.ok) {
