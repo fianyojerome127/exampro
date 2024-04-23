@@ -40,7 +40,7 @@ function signInUser(userData) {
     window.location.href = '../Components/student.html';
   })
   .catch(error => {
-    alert('Authentication failed');
+    alert('Authentication failedd');
     console.error(error);
   });
 }
