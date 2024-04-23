@@ -134,7 +134,7 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/signin', async (req, res) => {
   try {
     const { username, password } = req.body;
 
