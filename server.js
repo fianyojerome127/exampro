@@ -83,28 +83,10 @@ const examinationSchema = new mongoose.Schema({
   time: String,
   duration: String,
   examId: { type: String, required: true, unique: true }, // Keep required flag for uniqueness
-  //roomNumber: { type: String }, // Remove required flag for automatic generation
-});
-
-// Pre-save middleware to generate room number and exam ID
-examinationSchema.pre('save', async function (next) {
-  try {
-      // Generate room number (example: RN001)
-      this.roomNumber = 'RN' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-
-      // Generate unique exam ID (example: EXAM001)
-      if (!this.examId) {
-          this.examId = 'EXAM' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-      }
-
-      // Proceed to save
-      next();
-  } catch (error) {
-      next(error);
-  }
 });
 
 const Examination = mongoose.model('Examination', examinationSchema);
+
 
 
 
@@ -253,9 +235,6 @@ app.post('/api/courses/enroll', async (req, res) => {
     // Extract course data from request body
     const { courseId, courseName, credits } = req.body;
 
-    // Log the received course data
-    console.log('Received course data:', { courseId, courseName, credits });
-
 
     // Create new course document
     const course = new Course({ courseId, courseName, credits });
@@ -266,8 +245,6 @@ app.post('/api/courses/enroll', async (req, res) => {
     // Send success response
     res.status(201).json({ message: 'Course enrolled successfully' });
   } catch (error) {
-    // Log and send error response
-    console.error('Error enrolling course:', error);
     // Send error response
     res.status(500).json({ error: error.message });
   }
@@ -288,16 +265,23 @@ app.post('/api/courses/removecourse', async (req, res) => {
 });
 
 
-// API endpoint for enrolling an examination
+/// API endpoint for enrolling an examination
 app.post('/api/examinations/enroll', async (req, res) => {
   try {
-      const { courseId, date, time, duration } = req.body;
-      // Create a new examination document in the database
-      const examination = new Examination({ courseId, date, time, duration });
-      await examination.save();
-      res.status(200).json({ message: 'Examination enrolled successfully' });
+    const { courseId, date, time, duration } = req.body;
+    
+    // Generate a unique examId
+    const examId = generateExamId();
+
+    // Create a new examination document in the database with the generated examId
+    const examination = new Examination({ courseId, date, time, duration, examId });
+    
+    // Save the examination to the database
+    await examination.save();
+    
+    res.status(200).json({ message: 'Examination enrolled successfully' });
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 

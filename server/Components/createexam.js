@@ -5,7 +5,6 @@ function loadExaminationDetails() {
     return details || null; // Return null if no details are available
 }
 
-
 // Function to save examination details to localStorage
 function saveExaminationDetails(details) {
     console.log('Saving examination details:', details); // Add this line for debugging
@@ -40,8 +39,8 @@ function renderExaminationForm(details) {
     // Append the form HTML to the form container
     formContainer.innerHTML = formHTML;
 
-    const detailsList = document.getElementById('detailsList');
-    
+    const detailsList = document.getElementById('detailsList');   
+
     if (details && details.length > 0) {
         details.forEach(detail => {
             const li = document.createElement('li');
@@ -70,7 +69,6 @@ function renderExaminationForm(details) {
     });
 }
 
-
 // Function to handle enrollment of examination
 async function enrollExamination(courseId, date, time, duration) {
     try {
@@ -79,8 +77,9 @@ async function enrollExamination(courseId, date, time, duration) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ courseId, date, time, duration })
+            body: JSON.stringify({ examId: generateExamId(), courseId, date, time, duration }) // Add examId
         });
+
         if (response.ok) {
             // Examination enrolled successfully
             alert('Examination enrolled successfully');
@@ -105,6 +104,19 @@ async function enrollExamination(courseId, date, time, duration) {
     }
 }
 
+// Function to generate a unique examId
+function generateExamId() {
+    // Generate a timestamp (milliseconds since epoch)
+    const timestamp = new Date().getTime();
+
+    // Generate a random number between 0 and 9999
+    const randomNum = Math.floor(Math.random() * 10000);
+
+    // Combine timestamp and random number to create examId
+    const examId = `EXAM-${timestamp}-${randomNum}`;
+
+    return examId;
+}
 
 
 // Initial rendering of examination details
