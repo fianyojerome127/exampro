@@ -90,7 +90,12 @@ async function enrollExamination(courseId, date, time, duration) {
             alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
 
-            // No need to update examination details here since examId is generated on the server side
+            // Save examination details to localStorage
+            const newDetail = { examId, courseId, date, time, duration };
+            const details = loadExaminationDetails() || [];
+            details.push(newDetail);
+            saveExaminationDetails(details);
+            renderExaminationForm(details);
         } else {
             // Failed to enroll examination
             const responseData = await response.json();
@@ -103,9 +108,6 @@ async function enrollExamination(courseId, date, time, duration) {
         console.error('Error enrolling examination:', error.message);
     }
 }
-
-
-
 
 
 // Initial rendering of examination details
