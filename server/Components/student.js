@@ -104,29 +104,27 @@ function renderStudentInfo(studentInfo) {
     studentInfoContainer.innerHTML = studentInfoHTML;
 }
 
-// Function to render upcoming exams
 function renderUpcomingExams(upcomingExams) {
-    // Get the HTML element where you want to render the upcoming exams
     const upcomingExamsContainer = document.getElementById('upcoming-exams');
 
-    // Create HTML elements to display the upcoming exams
-    const examsHTML =  `
-        <div class="Examination">
-            <p><strong>Course ID:</strong> ${upcomingExams.courseId}</p>
-            <p><strong>Date:</strong> ${upcomingExams.date}</p>
-            <p><strong>Time:</strong> ${upcomingExams.time}</p>
-            <!-- Add more fields as needed -->
-        </div>
-    `;
+    // Clear previous content
+    upcomingExamsContainer.innerHTML = '';
 
-    // Update the HTML of the container element with the upcoming exams
-    upcomingExamsContainer.innerHTML = examsHTML;
+    // Loop through each exam and generate HTML
+    upcomingExams.forEach(exam => {
+        const examHTML = `
+            <div class="Examination">
+                <p><strong>Course ID:</strong> ${exam.courseId}</p>
+                <p><strong>Date:</strong> ${exam.date}</p>
+                <p><strong>Time:</strong> ${exam.time}</p>
+                <p><strong>Location:</strong> ${exam.location}</p>
+                <!-- Add more fields as needed -->
+            </div>
+        `;
+        // Append HTML for each exam to the container
+        upcomingExamsContainer.innerHTML += examHTML;
+    });
 }
-
-
-
-
-
 
 
 // Function to fetch student data and check enrollment status
@@ -193,4 +191,4 @@ function initializePage() {
 window.onload = initializePage;
 
 
-ChatGPT
+
