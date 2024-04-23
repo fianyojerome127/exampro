@@ -1,23 +1,26 @@
-
-
-// Load examination details from localStorage
-function loadExaminationDetails() {
-    const details = JSON.parse(localStorage.getItem('examinationDetails'));
-    console.log('Loaded examination details:', details); // For debugging
-    return details || []; // Return an empty array if no details are available
-}
-
-
-// Function to save examination details to localStorage
-function saveExaminationDetails(details) {
-    console.log('Saving examination details:', details); // Add this line for debugging
-    localStorage.setItem('examinationDetails', JSON.stringify(details));
+// Function to load examination details from the server
+async function loadExaminationDetailsFromServer() {
+    try {
+        const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/examinations');
+        if (response.ok) {
+            const data = await response.json();
+            return data.examinations; // Assuming the response contains an array of examinations
+        } else {
+            throw new Error('Failed to fetch examination details from the server');
+        }
+    } catch (error) {
+        console.error('Error loading examination details:', error.message);
+        return []; // Return an empty array if there's an error
+    }
 }
 
 // Function to render examination details
-function renderExaminationForm(details) {
+async function renderExaminationForm() {
     const formContainer = document.getElementById('form-render');
     formContainer.innerHTML = ''; // Clear any existing content
+
+    // Load examination details from the server
+    const details = await loadExaminationDetailsFromServer();
 
     // Create the form HTML
     const formHTML = `
@@ -42,7 +45,7 @@ function renderExaminationForm(details) {
     // Append the form HTML to the form container
     formContainer.innerHTML = formHTML;
 
-    const detailsList = document.getElementById('detailsList');   
+    const detailsList = document.getElementById('detailsList');
 
     if (details && details.length > 0) {
         details.forEach(detail => {
@@ -90,12 +93,8 @@ async function enrollExamination(courseId, date, time, duration) {
             alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
 
-            // Save examination details to localStorage
-            const newDetail = { examId, courseId, date, time, duration };
-            const details = loadExaminationDetails() || [];
-            details.push(newDetail);
-            saveExaminationDetails(details);
-            renderExaminationForm(details);
+            // Re-render examination form to reflect changes
+            await renderExaminationForm();
         } else {
             // Failed to enroll examination
             const responseData = await response.json();
@@ -109,6 +108,5 @@ async function enrollExamination(courseId, date, time, duration) {
     }
 }
 
-
 // Initial rendering of examination details
-renderExaminationForm(loadExaminationDetails());
+renderExaminationForm();
