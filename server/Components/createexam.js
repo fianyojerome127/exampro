@@ -1,3 +1,18 @@
+// Function to generate a unique examId
+function generateExamId() {
+    // Generate a timestamp (milliseconds since epoch)
+    const timestamp = new Date().getTime();
+
+    // Generate a random number between 0 and 9999
+    const randomNum = Math.floor(Math.random() * 10000);
+
+    // Combine timestamp and random number to create examId
+    const examId = `EXAM-${timestamp}-${randomNum}`;
+
+    return examId;
+}
+
+
 // Function to load examination details from localStorage
 function loadExaminationDetails() {
     const details = JSON.parse(localStorage.getItem('examinationDetails'));
@@ -104,19 +119,7 @@ async function enrollExamination(courseId, date, time, duration) {
     }
 }
 
-// Function to generate a unique examId
-function generateExamId() {
-    // Generate a timestamp (milliseconds since epoch)
-    const timestamp = new Date().getTime();
 
-    // Generate a random number between 0 and 9999
-    const randomNum = Math.floor(Math.random() * 10000);
-
-    // Combine timestamp and random number to create examId
-    const examId = `EXAM-${timestamp}-${randomNum}`;
-
-    return examId;
-}
 
 
 // Initial rendering of examination details
