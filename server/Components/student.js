@@ -192,3 +192,5 @@ function initializePage() {
 // Call the initialize function when the page loads
 window.onload = initializePage;
 
+
+ChatGPT
