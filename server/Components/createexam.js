@@ -70,15 +70,17 @@ function renderExaminationForm(details) {
     });
 }
 
-// Function to handle enrollment of examination
 async function enrollExamination(courseId, date, time, duration) {
     try {
+        // Generate unique examId
+        const examId = uuidv4();
+
         const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/examinations/enroll', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ examId, courseId, date, time, duration }) // Add examId
+            body: JSON.stringify({ examId, courseId, date, time, duration })
         });
 
         if (response.ok) {
@@ -86,12 +88,7 @@ async function enrollExamination(courseId, date, time, duration) {
             alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
 
-            // Update examination details and render again
-            const newDetail = { courseId, date, time, duration };
-            const details = loadExaminationDetails() || [];
-            details.push(newDetail);
-            saveExaminationDetails(details);
-            renderExaminationForm(details);
+            // No need to update examination details here since examId is generated on the server side
         } else {
             // Failed to enroll examination
             const responseData = await response.json();
@@ -104,6 +101,7 @@ async function enrollExamination(courseId, date, time, duration) {
         console.error('Error enrolling examination:', error.message);
     }
 }
+
 
 
 
