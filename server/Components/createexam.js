@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 
 // Function to load examination details from the server
 async function loadExaminationDetailsFromServer() {
@@ -79,8 +79,8 @@ async function renderExaminationForm() {
 
 async function enrollExamination(courseId, date, time, duration) {
     try {
-        // Generate unique examId
-        const examId = uuidv4();
+        // Generate unique examId using Math.floor(Math.random() * 10000)
+        const examId = Math.floor(Math.random() * 10000).toString();
 
         const response = await fetch('https://exampro-d36e23768ba5.herokuapp.com/api/examinations/enroll', {
             method: 'POST',
@@ -95,8 +95,7 @@ async function enrollExamination(courseId, date, time, duration) {
             alert('Examination enrolled successfully');
             console.log('Examination enrolled successfully');
 
-            // Re-render examination form to reflect changes
-            await renderExaminationForm();
+            // No need to update examination details here since examId is generated on the client side
         } else {
             // Failed to enroll examination
             const responseData = await response.json();
@@ -109,6 +108,7 @@ async function enrollExamination(courseId, date, time, duration) {
         console.error('Error enrolling examination:', error.message);
     }
 }
+
 
 // Initial rendering of examination details
 renderExaminationForm();
