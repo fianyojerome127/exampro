@@ -119,6 +119,8 @@ app.post('/api/signup', async (req, res) => {
 app.post('/api/signin', async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log('Received username:', username);
+    console.log('Received password:', password);
 
     // Find the user with the provided username (student ID)
     const user = await User.findOne({ username });
