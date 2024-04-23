@@ -1,24 +1,10 @@
-// Function to generate a unique examId
-function generateExamId() {
-    // Generate a timestamp (milliseconds since epoch)
-    const timestamp = new Date().getTime();
-
-    // Generate a random number between 0 and 9999
-    const randomNum = Math.floor(Math.random() * 10000);
-
-    // Combine timestamp and random number to create examId
-    const examId = `EXAM-${timestamp}-${randomNum}`;
-
-    return examId;
-}
-
-
-// Function to load examination details from localStorage
+// Load examination details from localStorage
 function loadExaminationDetails() {
     const details = JSON.parse(localStorage.getItem('examinationDetails'));
-    console.log('Loaded examination details:', details); // Add this line for debugging
-    return details || null; // Return null if no details are available
+    console.log('Loaded examination details:', details); // For debugging
+    return details || []; // Return an empty array if no details are available
 }
+
 
 // Function to save examination details to localStorage
 function saveExaminationDetails(details) {

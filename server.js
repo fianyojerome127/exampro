@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const path = require('path'); // Import the path module
-//const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 
 
@@ -265,23 +265,21 @@ app.post('/api/courses/removecourse', async (req, res) => {
 });
 
 
-/// API endpoint for enrolling an examination
+
+// API endpoint for enrolling an examination
 app.post('/api/examinations/enroll', async (req, res) => {
   try {
-    const { courseId, date, time, duration } = req.body;
-    
-    // Generate a unique examId
-    const examId = generateExamId();
+      const { courseId, date, time, duration } = req.body;
+      // Create a new examination document in the database
+      const examination = new Examination({ courseId, date, time, duration });
 
-    // Create a new examination document in the database with the generated examId
-    const examination = new Examination({ courseId, date, time, duration, examId });
-    
-    // Save the examination to the database
-    await examination.save();
-    
-    res.status(200).json({ message: 'Examination enrolled successfully' });
+      // Generate unique exam ID using uuid
+      examination.examId = uuidv4();
+
+      await examination.save();
+      res.status(200).json({ message: 'Examination enrolled successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
